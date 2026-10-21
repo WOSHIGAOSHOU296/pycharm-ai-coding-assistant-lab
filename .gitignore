@@ -1,0 +1,14 @@
+# 预览/构建临时产物
+_preview/
+*.pdf.tmp
+
+# Office 临时锁文件
+~$*
+
+# 系统垃圾
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 截图原图备份（正式引用的是 screenshots/ 下的同名文件）
+screenshots/_原图/
