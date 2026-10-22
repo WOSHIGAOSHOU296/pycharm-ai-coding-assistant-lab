@@ -26,22 +26,23 @@
 | 1 | [`01-操作指南手册.md`](01-操作指南手册.md) | 提交物 1：操作指南手册（Markdown，含 8 个必备章节 + 配图位） |
 | 2 | [`02-对比分析报告.md`](02-对比分析报告.md) | 提交物 3：对比分析报告（1500 字左右，含实测数据） |
 | 3 | [`03-分享PPT.pptx`](03-分享PPT.pptx) | 提交物 4：5 分钟分享 PPT（10 页，可现场操作） |
-| 4 | [`screenshots/`](screenshots/) | 提交物 2：功能验证截图（≥3 张）——**位已留好，需用真机截图覆盖同名文件** |
+| 4 | [`screenshots/`](screenshots/) | 提交物 2：功能验证截图（**6 张，全部为本机真机实拍**） |
 | 5 | [`assets/环境快照.md`](assets/环境快照.md) | 环境取证记录，答辩被问「你怎么证明」时直接翻这份 |
 
-## 三、截图怎么补（唯一需要你动手的部分）
+## 三、截图（已补齐，全部真机实拍）
 
-截图必须是**你自己屏幕上真实发生的画面**，我无法代拍。五个文件名已经写进手册，**把图存成同名文件覆盖过去，手册和 PPT 会自动对上**：
+6 张图都是在 `G:\PycharmProjects` 这台机器上现场跑出来的，没有一张是示意图或合成图：
 
-| 文件名 | 拍什么 | 怎么出这个画面 |
+| 文件名 | 画面 | 出处 |
 | --- | --- | --- |
-| `01-pycharm-plugins.png` | PyCharm 已安装插件列表 | `Ctrl+Alt+S` → Plugins → Installed，能同时看到 Claude Code / Comate / Copilot |
-| `02-api-config.png` | API 地址与模型名 | 打开 `C:\Users\16218\.claude\settings.json`（**把 token 打码**）或插件内的模型选择下拉 |
-| `03-dialog-explain.png` | 对话解释代码 | 打开 `G:\PycharmProjects\test.py`，全选 → 右键/面板提问「逐行解释这段代码」 |
-| `04-completion-test.png` | 补全或测试生成 | 让 Agent 给 `test.py` 生成 pytest 用例并写入 `test_kmeans.py`，或截 Comate/Copilot 的行内补全 |
-| `05-agent-task.png` | Agent 执行任务 | 让 Agent「跑一下 test.py，报错就改」，截它调用 Read/Write/Bash 的时间线 |
+| `01-pycharm-plugins.png` | PyCharm「插件 → 已安装」：CC GUI 0.5.7 + Comate 4.14.0 + Copilot 1.17.0 + Qoder CN 同屏 | `Ctrl+Alt+S` |
+| `02-api-config.png` | `settings.json` 的 `env` 段：端点、模型别名（**token 已打码为 `sk-•••`**） | 脱敏副本在记事本中放大 |
+| `03-dialog-explain.png` | 面板内「第一部分：导入包（import）」逐条解释 numpy / matplotlib / sklearn | CC GUI 工具窗口 |
+| `04-completion-test.png` | Agent 生成 `test_kmeans.py`，以 **diff 审查视图**回填 IDE（拒绝 / 始终应用 / 应用） | 面板派活后自动弹出 |
+| `05-agent-task.png` | 首跑失败 → 判定"断言 0.99 不可达" → 改 0.95 并加注释 → 重跑 | 同上，任务继续 |
+| `06-agent-summary.png` | 收尾总结 + 本次扣费口径：耗时 7:47、输入 527.5k / 输出 8.3k | 同上，任务结束 |
 
-详见 [`screenshots/README-截图指南.md`](screenshots/README-截图指南.md)。
+> 想替换成自己重拍的版本，直接覆盖同名文件即可，手册与 PPT 会按文件名自动对上（PPT 需重跑 `tools/make_ppt.py` 重新嵌图）。
 
 ## 四、提交到 GitHub
 
