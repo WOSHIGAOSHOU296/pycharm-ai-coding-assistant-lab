@@ -1,4 +1,4 @@
-﻿# PyCharm AI 编程助手实训 · 交付包
+# PyCharm AI 编程助手实训 · 交付包
 
 > 课程任务：为 PyCharm 配置一款 AI 编程助手，完成代码阅读、解释、补全与任务自动化，并产出「操作指南手册 + 功能验证截图 + 对比分析报告 + 分享 PPT」。
 
@@ -25,7 +25,7 @@
 | --- | --- | --- |
 | 1 | [`01-操作指南手册.md`](01-操作指南手册.md) | 提交物 1：操作指南手册（Markdown，含 8 个必备章节 + 配图位） |
 | 2 | [`02-对比分析报告.md`](02-对比分析报告.md) | 提交物 3：对比分析报告（1500 字左右，含实测数据） |
-| 3 | [`03-分享PPT.pptx`](03-分享PPT.pptx) | 提交物 4：5 分钟分享 PPT（10 页，可现场操作） |
+| 3 | [`03-分享PPT.pptx`](03-分享PPT.pptx) | 提交物 4：5 分钟分享 PPT（7 页讲解版，现场演示操作） |
 | 4 | [`screenshots/`](screenshots/) | 提交物 2：功能验证截图（**6 张，全部为本机真机实拍**） |
 | 5 | [`assets/环境快照.md`](assets/环境快照.md) | 环境取证记录，答辩被问「你怎么证明」时直接翻这份 |
 
@@ -42,22 +42,26 @@
 | `05-agent-task.png` | 首跑失败 → 判定"断言 0.99 不可达" → 改 0.95 并加注释 → 重跑 | 同上，任务继续 |
 | `06-agent-summary.png` | 收尾总结 + 本次扣费口径：耗时 7:47、输入 527.5k / 输出 8.3k | 同上，任务结束 |
 
-> 想替换成自己重拍的版本，直接覆盖同名文件即可，手册与 PPT 会按文件名自动对上（PPT 需重跑 `tools/make_ppt.py` 重新嵌图）。
+> 想替换成自己重拍的版本，直接覆盖同名文件即可，手册按文件名自动对上。
+> 另外 `tools/make_ppt.py` 能重建一份 **10 页、把 6 张截图嵌进页面**的 PPT（仓库里现存的 `03-分享PPT.pptx` 是精简的 7 页讲解版，不含截图，靠现场演示）。
 
-## 四、提交到 GitHub
+## 四、仓库地址与可见性
 
-已推送至：**https://github.com/WOSHIGAOSHOU296/pycharm-ai-coding-assistant-lab**（**私有**仓库）。
+**https://github.com/WOSHIGAOSHOU296/pycharm-ai-coding-assistant-lab** —— **公开仓库**，任何人可直接访问，无需授权。
 
-设为私有的原因：包内含姓名、学号与真实配置画面，公开前请自行确认。要交给老师看，两条路：
+公开前做过这些处理（见 [五、安全提示](#五安全提示)）：
 
-- 仓库页 `Settings → General → Danger Zone → Change visibility → Make public`（一键转公开）；
-- 或者 `Settings → Collaborators → Add people` 把老师账号加为协作者（保持私有）。
+- 真实 `ANTHROPIC_AUTH_TOKEN` **从未入库**；文档与 PPT 里一律是 `sk-****`，唯一那张读到配置的截图 `02-api-config.png` 是从**脱敏副本**截的，token 位置是圆点；
+- 仓库里留的是姓名 + 学号（封面要求，方便老师核对）；
+- 这台机器的 Windows 用户名会出现在若干路径里（`C:\Users\16218\...`），属于复现所需，未做替换。
+
+要改回私有：`Settings → General → Danger Zone → Change visibility → Make private`。
 
 后续改动再推：
 
 ```bash
 cd "D:\deep seek\workplace\PyCharm-AI编程助手实训"
-git add . && git commit -m "docs: 更新截图"
+git add . && git commit -m "docs: 更新说明"
 git push
 ```
 
@@ -65,5 +69,15 @@ git push
 
 ## 五、安全提示
 
-- `.claude/settings.json` 里的 `ANTHROPIC_AUTH_TOKEN`（`sk-****`）是**真实密钥**，交付包内一律以 `sk-****（已脱敏）` 呈现；截图时务必打码，不要把这个仓库设成公开后带着密钥。
-- 仓库已带 `.gitignore`，排除截图原图缓存与临时文件。
+公开前逐项核过（可复核）：
+
+| 检查项 | 做法 | 结果 |
+| --- | --- | --- |
+| API 密钥 | 对工作区与**全部 git 历史**做 `sk-` / `gho_` / `ghp_` / `github_pat_` / `ANTHROPIC_AUTH_TOKEN` 全文扫描 | 真实密钥**从未入库**；文档与 PPT 里是占位符 `sk-****` |
+| 历史残留 | 早期 README 曾写过密钥前 4 位（`sk-****…`），已连历史一起重写清除 | 历史里也不再有该前缀 |
+| 配置截图 | `02-api-config.png` 截自**脱敏副本**（`sk-[A-Za-z0-9_-]{8,}` → `sk-•••`），原件 `C:\Users\16218\.claude\settings.json` 未入库 | 图里看不到密钥 |
+| 凭据文件 | `.gitignore` 排除本地凭据、`.ssh`、`.claude/` 之类目录 | 未提交 |
+
+保留的可见信息：**姓名 + 学号**（封面要求，方便老师核对）；Windows 用户名 `16218` 出现在若干路径与截图中（复现所需）。
+
+`.claude/settings.json` 里的 `ANTHROPIC_AUTH_TOKEN` 是**真实密钥**，请继续只在本地使用；给这个仓库提交新内容前，先扫一遍再推。
